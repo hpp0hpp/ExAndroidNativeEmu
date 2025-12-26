@@ -383,7 +383,7 @@ class Modules:
                         value = sym_addr + value_orig
                         # Write the new value
                         #print(value)
-                        self.emu.mu.mem_write(rel_addr, value.to_bytes(4, byteorder='little'))
+                        self.emu.mu.mem_write(rel_addr, value.to_bytes(4, byteorder='little', signed=True))
                     #
                 #
                 elif (rel_info_type in (arm.R_AARCH64_ABS64, arm.R_AARCH64_ABS32)):
@@ -398,7 +398,7 @@ class Modules:
                         value = sym_addr + value_orig + addend
                         # Write the new value
                         #print(value)
-                        self.emu.mu.mem_write(rel_addr, value.to_bytes(8, byteorder='little'))
+                        self.emu.mu.mem_write(rel_addr, value.to_bytes(8, byteorder='little', signed=True))
                     #
                 #
                 elif rel_info_type in (arm.R_ARM_GLOB_DAT, arm.R_ARM_JUMP_SLOT):
@@ -410,7 +410,7 @@ class Modules:
 
                         # Write the new value
                         #print(value)
-                        self.emu.mu.mem_write(rel_addr, value.to_bytes(4, byteorder='little'))
+                        self.emu.mu.mem_write(rel_addr, value.to_bytes(4, byteorder='little', signed=True))
                     #
                 #
                 elif rel_info_type in (arm.R_AARCH64_GLOB_DAT, arm.R_AARCH64_JUMP_SLOT):
@@ -422,7 +422,7 @@ class Modules:
                         addend = rel["r_addend"]
                         # Write the new value
                         #print(value)
-                        self.emu.mu.mem_write(rel_addr, (value+addend).to_bytes(8, byteorder='little'))
+                        self.emu.mu.mem_write(rel_addr, (value+addend).to_bytes(8, byteorder='little', signed=True))
                     #
                 #
                 elif rel_info_type in (arm.R_ARM_RELATIVE,):
@@ -436,7 +436,7 @@ class Modules:
 
                         #print(value)
                         # Write the new value
-                        self.emu.mu.mem_write(rel_addr, value.to_bytes(4, byteorder='little'))
+                        self.emu.mu.mem_write(rel_addr, value.to_bytes(4, byteorder='little', signed=True))
                     else:
                         raise NotImplementedError() #impossible
                 elif rel_info_type in (arm.R_AARCH64_RELATIVE,):
@@ -448,7 +448,7 @@ class Modules:
 
                         #print(value)
                         # Write the new value
-                        self.emu.mu.mem_write(rel_addr, value.to_bytes(8, byteorder='little'))
+                        self.emu.mu.mem_write(rel_addr, value.to_bytes(8, byteorder='little', signed=True))
                     else:
                         raise NotImplementedError() #impossible
                 else:
